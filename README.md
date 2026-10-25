@@ -2,6 +2,8 @@
 
 A complete, fully functional digital logic IC simulator and physical laboratory training instrument, designed and developed for digital logic and computer organization experiments.
 
+### 🌐 Live Web Application: [https://pavankande111.github.io/dlco/](https://pavankande111.github.io/dlco/)
+
 ---
 
 ## Key Features
