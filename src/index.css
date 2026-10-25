@@ -1,0 +1,485 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   DLCO VIRTUAL IC TRAINER KIT SIMULATOR — AUTHENTIC HARDWARE LAB STYLES
+   ========================================================================== */
+
+:root {
+  --wood-border: #5c3a21;
+  --wood-bg: linear-gradient(135deg, #784824 0%, #543118 45%, #8c532b 100%);
+  --plate-bg: #e6eae7;
+  --plate-metal: linear-gradient(180deg, #f2f5f3 0%, #e1e6e3 100%);
+  --plate-border: #9fa9a4;
+  --ink-primary: #15242b;
+  --ink-secondary: #4a5c64;
+  --ink-crimson: #b91c1c;
+  --ink-green: #15803d;
+  --ink-blue: #1d4ed8;
+  --jack-metal: #cbd5e1;
+  --jack-hole: #1e293b;
+  --vcc-red: #dc2626;
+  --gnd-green: #16a34a;
+  --clk-amber: #d97706;
+  --zif-green: #2d8a68;
+  --zif-dark: #1b5b44;
+  --chip-body: #1c2427;
+  --led-off: #450a0a;
+  --led-on: #ef4444;
+  --led-glow: rgba(239, 68, 68, 0.7);
+  --probe-green: #22c55e;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #0f172a;
+  color: #1f2937;
+  min-height: 100vh;
+  margin: 0;
+  user-select: none;
+}
+
+/* Wooden Case Enclosure */
+.wooden-case {
+  position: relative;
+  background: var(--wood-bg);
+  padding: 22px 24px 24px 24px;
+  border-radius: 12px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.7),
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.6);
+  border: 4px solid var(--wood-border);
+  min-width: 1260px;
+}
+
+.case-hinge {
+  position: absolute;
+  top: -9px;
+  width: 44px;
+  height: 16px;
+  background: linear-gradient(180deg, #d4af37 0%, #aa820a 50%, #e6ca65 100%);
+  border: 1px solid #7d5e06;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  z-index: 5;
+}
+.hinge-left { left: 160px; }
+.hinge-center { left: calc(50% - 22px); }
+.hinge-right { right: 160px; }
+
+.case-inner-rim {
+  background: #2a1c12;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+}
+
+/* Trainer Board Faceplate */
+.trainer-faceplate {
+  position: relative;
+  background: 
+    repeating-linear-gradient(90deg, #f3f6f4 0px, #e8edea 1px, #f3f6f4 2px),
+    linear-gradient(180deg, #fcfdfc 0%, #dce4e0 100%);
+  border: 2px solid #7e8d87;
+  border-radius: 8px;
+  box-shadow: 
+    inset 0 1px 3px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.22),
+    0 4px 14px rgba(0, 0, 0, 0.45);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Plate Screws */
+.plate-screw {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle at 40% 35%, #ffffff 0%, #cbd5e1 45%, #64748b 85%, #334155 100%);
+  border-radius: 50%;
+  border: 1px solid #334155;
+  box-shadow: inset 0 1px 1px #fff, 0 1.5px 3px rgba(0,0,0,0.5);
+  z-index: 20;
+}
+.plate-screw::before {
+  content: "";
+  position: absolute;
+  top: 4.5px;
+  left: 2px;
+  width: 7px;
+  height: 1.5px;
+  background: #0f172a;
+}
+.screw-tl { top: 7px; left: 7px; }
+.screw-tr { top: 7px; right: 7px; }
+.screw-bl { bottom: 7px; left: 7px; }
+.screw-br { bottom: 7px; right: 7px; }
+.screw-tc { top: 7px; left: calc(50% - 6px); }
+.screw-bc { bottom: 7px; left: calc(50% - 6px); }
+
+/* Section Panels */
+.panel-section {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1.5px solid #b8c4be;
+  border-radius: 6px;
+  padding: 11px 14px;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    0 1px 3px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--ink-secondary);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.text-red { color: #b91c1c; }
+.text-clock { color: #b45309; }
+.text-pulser { color: #0284c7; }
+
+/* Banana Terminal Jacks */
+.terminal-jack {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #cbd5e1 45%, #64748b 75%, #334155 100%);
+  border: 1.5px solid #1e293b;
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.45),
+    inset 0 1px 1px rgba(255,255,255,0.9),
+    inset 0 -1px 2px rgba(0,0,0,0.5);
+  cursor: crosshair;
+  position: relative;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.terminal-jack::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+.terminal-jack::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #0f172a 0%, #020617 80%, #b45309 100%);
+  box-shadow: inset 0 1.5px 3px #000, 0 0 1px rgba(255,255,255,0.4);
+}
+.terminal-jack:hover {
+  transform: scale(1.25);
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.9), 0 0 4px #2563eb;
+  border-color: #1d4ed8;
+}
+.terminal-jack.selected {
+  transform: scale(1.35);
+  border-color: #facc15 !important;
+  box-shadow: 0 0 12px #facc15, 0 0 20px rgba(250, 204, 21, 0.6), inset 0 0 4px #facc15 !important;
+}
+.terminal-jack.connected {
+  border-color: #2563eb;
+}
+
+.jack-vcc {
+  background: radial-gradient(circle at 35% 30%, #fecaca 0%, #ef4444 45%, #b91c1c 75%, #7f1d1d 100%);
+  border-color: #7f1d1d;
+}
+.jack-vcc::after {
+  background: radial-gradient(circle at 40% 40%, #450a0a 0%, #1c0505 80%, #ef4444 100%);
+}
+
+.jack-gnd {
+  background: radial-gradient(circle at 35% 30%, #bbf7d0 0%, #22c55e 45%, #15803d 75%, #052e16 100%);
+  border-color: #052e16;
+}
+.jack-gnd::after {
+  background: radial-gradient(circle at 40% 40%, #052e16 0%, #021a0d 80%, #22c55e 100%);
+}
+
+.jack-clk {
+  background: radial-gradient(circle at 35% 30%, #fef08a 0%, #f59e0b 45%, #b45309 75%, #78350f 100%);
+  border-color: #78350f;
+}
+.jack-clk-bar {
+  background: radial-gradient(circle at 35% 30%, #ffedd5 0%, #f97316 45%, #c2410c 75%, #7c2d12 100%);
+  border-color: #7c2d12;
+}
+.jack-pulser {
+  background: radial-gradient(circle at 35% 30%, #bae6fd 0%, #0ea5e9 45%, #0369a1 75%, #082f49 100%);
+  border-color: #0c4a6e;
+}
+
+/* LED Lamps */
+.lamp {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, #991b1b 0%, #450a0a 60%, #170303 100%);
+  border: 1.5px solid #0f172a;
+  box-shadow: 
+    inset 0 2px 2px rgba(255,255,255,0.4),
+    inset 0 -1px 2px rgba(0,0,0,0.8),
+    0 1px 3px rgba(0,0,0,0.4);
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.lamp::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 4px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+  pointer-events: none;
+}
+.lamp.on {
+  background: radial-gradient(circle at 40% 30%, #ffffff 0%, #f87171 25%, #ef4444 65%, #991b1b 100%);
+  box-shadow: 
+    0 0 8px #ef4444,
+    0 0 16px rgba(239, 68, 68, 0.9),
+    0 0 26px rgba(239, 68, 68, 0.5),
+    inset 0 1.5px 2px #ffffff;
+  border-color: #fca5a5;
+}
+.lamp.conflict {
+  background: radial-gradient(circle at 40% 30%, #ffffff 0%, #fde047 25%, #eab308 65%, #854d0e 100%);
+  box-shadow: 
+    0 0 10px #eab308,
+    0 0 20px rgba(234, 179, 8, 0.8),
+    inset 0 1.5px 2px #ffffff;
+  border-color: #fef08a;
+}
+
+.lamp-power {
+  width: 13px;
+  height: 13px;
+}
+.lamp-power.on {
+  background: radial-gradient(circle at 40% 30%, #ffffff 0%, #f87171 25%, #ef4444 65%, #991b1b 100%);
+  box-shadow: 0 0 10px #ef4444, 0 0 20px rgba(239, 68, 68, 0.8);
+}
+
+.lamp-clock.on {
+  background: radial-gradient(circle at 40% 30%, #ffffff 0%, #fde047 25%, #f59e0b 65%, #b45309 100%);
+  box-shadow: 0 0 10px #f59e0b, 0 0 20px rgba(245, 158, 11, 0.8);
+  border-color: #fde68a;
+}
+
+.lamp-pulser.on {
+  background: radial-gradient(circle at 40% 30%, #ffffff 0%, #7dd3fc 25%, #0ea5e9 65%, #0369a1 100%);
+  box-shadow: 0 0 10px #0ea5e9, 0 0 20px rgba(14, 165, 233, 0.8);
+  border-color: #bae6fd;
+}
+
+.probe-lamp-h.on {
+  background: radial-gradient(circle at 40% 30%, #ffffff 0%, #f87171 25%, #ef4444 65%, #991b1b 100%);
+  box-shadow: 0 0 10px #ef4444, 0 0 18px rgba(239, 68, 68, 0.8);
+}
+.probe-lamp-l.on {
+  background: radial-gradient(circle at 40% 30%, #ffffff 0%, #86efac 25%, #22c55e 65%, #15803d 100%);
+  box-shadow: 0 0 10px #22c55e, 0 0 18px rgba(34, 197, 94, 0.8);
+}
+
+/* Rocker Switch */
+.rocker-switch {
+  width: 34px;
+  height: 50px;
+  background: #090d16;
+  border: 2px solid #334155;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.5);
+}
+.rocker-handle {
+  width: 26px;
+  height: 23px;
+  background: linear-gradient(180deg, #ef4444 0%, #991b1b 100%);
+  border-radius: 3px;
+  position: absolute;
+  left: 2px;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.6);
+}
+.rocker-switch.on .rocker-handle {
+  top: 2px;
+}
+.rocker-switch.off .rocker-handle {
+  top: 21px;
+  background: linear-gradient(180deg, #64748b 0%, #334155 100%);
+}
+
+/* Hardware Toggle Switch (Input Units) */
+.toggle-switch-hardware {
+  width: 16px;
+  height: 30px;
+  background: linear-gradient(180deg, #090d16 0%, #1e293b 100%);
+  border: 1.5px solid #475569;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 
+    inset 0 2px 4px rgba(0,0,0,0.9),
+    0 1px 2px rgba(0,0,0,0.3);
+}
+.switch-lever {
+  width: 12px;
+  height: 13px;
+  background: linear-gradient(180deg, #f8fafc 0%, #94a3b8 50%, #475569 100%);
+  border-radius: 3px;
+  position: absolute;
+  left: 1px;
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.6),
+    inset 0 1px 1px #fff;
+  transition: top 0.12s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.toggle-switch-hardware.up .switch-lever {
+  top: 1px;
+  background: linear-gradient(180deg, #fee2e2 0%, #ef4444 40%, #991b1b 100%);
+  box-shadow: 0 2px 5px rgba(239, 68, 68, 0.5), inset 0 1px 1px #fff;
+}
+.toggle-switch-hardware.down .switch-lever {
+  top: 14px;
+  background: linear-gradient(180deg, #cbd5e1 0%, #64748b 60%, #334155 100%);
+}
+
+/* ZIF / DIP Sockets */
+.zif-socket-core {
+  background: var(--zif-green);
+  border: 2px solid var(--zif-dark);
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.2);
+  min-height: 230px;
+  width: 90px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.zif-socket-core:hover:not(.locked) {
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.zif-lever {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  width: 6px;
+  height: 38px;
+  background: #cbd5e1;
+  border: 1px solid #64748b;
+  border-radius: 2px;
+  transform-origin: top center;
+  transform: rotate(-15deg);
+  transition: transform 0.2s ease;
+}
+.zif-lever-knob {
+  width: 10px;
+  height: 10px;
+  background: #ef4444;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -3px;
+  left: -2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.zif-socket-core.locked .zif-lever {
+  transform: rotate(65deg);
+}
+
+/* Seated IC Chip */
+.seated-ic {
+  background: var(--chip-body);
+  border: 1px solid #334155;
+  border-radius: 3px;
+  width: 76px;
+  padding: 10px 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.2);
+  text-align: center;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.seated-ic::before {
+  content: "";
+  width: 12px;
+  height: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-top: none;
+  margin-top: -10px;
+  margin-bottom: 4px;
+}
+
+/* 7-Segment Displays */
+.seg-display {
+  background: #0f172a;
+  color: #ef4444;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 38px;
+  font-weight: 900;
+  width: 44px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 2px solid #334155;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.9);
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+}
+
+/* Wires SVG Canvas */
+.wires-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+}
+.wire-path {
+  fill: none;
+  stroke-linecap: round;
+  cursor: pointer;
+  pointer-events: stroke;
+  transition: stroke-width 0.15s ease, filter 0.15s ease;
+}
+.wire-path:hover {
+  stroke-width: 6 !important;
+  filter: drop-shadow(0 0 4px #fff);
+}
+.wire-path.selected {
+  stroke-width: 6 !important;
+  stroke: #facc15 !important;
+  filter: drop-shadow(0 0 6px #facc15);
+}
